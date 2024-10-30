@@ -1,0 +1,23 @@
+name: CI for HTML Project
+
+on:
+  push:
+    branches:
+      - main  # Chạy khi có push lên nhánh main
+  pull_request:
+    branches:
+      - main  # Chạy khi có pull request vào nhánh main
+
+jobs:
+  deploy:  # Job để triển khai
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to GitHub Pages  # Bước triển khai
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./  # Đường dẫn đến thư mục chứa index.html
